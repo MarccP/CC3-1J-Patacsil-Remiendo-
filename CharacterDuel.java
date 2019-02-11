@@ -1,14 +1,11 @@
 package rpg;
-
-
-public class TestCharacter {
+public class CharacterDuel {
     public static HeavyClass c2 = new HeavyClass("Heavy Joe",5,5,7);
-    public static WizardClass c3 = new WizardClass("Wizard Bob",7,5,10,20  );
+    public static WizardClass c3 = new WizardClass("Wizard Bob",7,5,10,10);
     public static Dice die = new Dice();
     
     public static void run(){
-       
-       
+  
        int counter = 1;
        
        while(c2.getCurrentLife() > 0 && c3.getCurrentLife() > 0) {
@@ -17,9 +14,10 @@ public class TestCharacter {
            System.out.println("");
            System.out.println("======== Round "+counter+" fight! ==========");
            
-           
-           System.out.println(c2.getName()+" : "+c2.getCurrentLife());
-           System.out.println(c3.getName()+" : "+c3.getCurrentLife());
+           //C2 is Joe
+           //C3 is Bob
+           System.out.println(c2.getName()+" Health: "+c2.getCurrentLife()+"/"+c2.getMaxLife());
+           System.out.println(c3.getName()+" Health: "+c3.getCurrentLife()+"/"+c3.getMaxLife()+" Mana: "+c3.getCurrentMagic()+"/"+c3.getMaxMagic());
            
            int turn = die.roll();
            
@@ -31,9 +29,6 @@ public class TestCharacter {
                character2_attack();
            }
            counter++;
-           if(counter == 4){
-               break;
-           }
         }
         //IF LIFE == NEGATIVE THEN LIFE = 0
         int life1 = c2.getCurrentLife();
@@ -93,9 +88,7 @@ public class TestCharacter {
                          //Do nothing
                     }else{
                         int heal = c3.castHeal();
-                         c3.heal(heal);
-
-                        System.out.println(c3.getName()+ " casts heal and  healed for "+ heal);
+                        c3.heal(heal);  
                     }
                    
                    break;
@@ -103,10 +96,13 @@ public class TestCharacter {
                    if(c3.getCurrentLife() <= 0){
                        //do nothing
                    }else{
-                   
                         int damage = c3.castLightningBolt();
                         c2.wound(damage);
-                        System.out.println(c3.getName()+ " casts lightning bolt and damages "+ c2.getName() +" for "+damage);
+                        if(c3.getCurrentMagic()<5){
+                            //Do nothing
+                        }else{
+                            System.out.println(c3.getName()+ " casts lightning bolt and damages "+ c2.getName() +" for "+damage);
+                        }  
                    }
                    break;
                case 4:
@@ -124,19 +120,20 @@ public class TestCharacter {
                          //Do nothing
                     }else{
                         int heal = c3.castHeal();
-                         c3.heal(heal);
-
-                        System.out.println(c3.getName()+ " casts heal and  healed for "+ heal);
+                        c3.heal(heal);
                     }
                    break;
                case 6:
                    if(c3.getCurrentLife() <= 0){
                        //do nothing
                    }else{
-                   
                         int damage = c3.castLightningBolt();
                         c2.wound(damage);
-                        System.out.println(c3.getName()+ " casts lightning bolt and damages "+ c2.getName() +" for "+damage);
+                        if(c3.getCurrentMagic()<5){
+                            //Do nothing
+                        }else{
+                            System.out.println(c3.getName()+ " casts lightning bolt and damages "+ c2.getName() +" for "+damage);
+                        }  
                    }
                    break;
                default:
@@ -165,7 +162,7 @@ public class TestCharacter {
                    break;
                case 2:
                    //Heal
-                   if(c2.getCurrentLife() == c2.getMaxLife()){
+                   if(c2.getCurrentLife() >= c2.getMaxLife()){
                        System.out.println(c2.getName() + " is already at full health and cannot be healed!");
                    }else if( c2.getCurrentLife() <=0){
                         //Do nothing
@@ -195,7 +192,7 @@ public class TestCharacter {
                    break;
                case 5: 
                    //Heal
-                   if(c2.getCurrentLife() == c2.getMaxLife()){
+                   if(c2.getCurrentLife() >= c2.getMaxLife()){
                        System.out.println(c2.getName() + " is already at full health and cannot be healed!");
                    }else if( c2.getCurrentLife() <=0){
                         //Do nothing

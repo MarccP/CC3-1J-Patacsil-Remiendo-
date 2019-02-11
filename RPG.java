@@ -6,8 +6,8 @@ public class RPG {
 
     public static void main(String[] args) {
        
-        TestCharacter.run();
-        
+        //TestCharacter.run();
+        CharacterDuel.run();
     }
     
 }

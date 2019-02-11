@@ -4,12 +4,12 @@
     
     static Dice dice = new Dice();
     
-    private String Name;
-    private int Strength;
-    private int Dexterity;
-    private int Intellegence;
-    private int Maxlife;
-    private int Currentlife;
+    protected String Name;
+    protected int Strength;
+    protected int Dexterity;
+    protected int Intellegence;
+    protected int Maxlife;
+    protected int Currentlife;
 
     public Character(String n, int s, int d, int i) {
     this.Name =n;
@@ -17,7 +17,7 @@
     this.Dexterity= d;
     this.Intellegence= i;
 
-    this.Maxlife = dice.roll()+20;
+    this.Maxlife = dice.roll()+15;
     this.Currentlife = Maxlife;
 
 
@@ -35,6 +35,7 @@
     public void heal(int heal) {
 
         if(Currentlife == Maxlife){
+            System.out.println(Name + " is already at full health and cannot be healed! ");
         }
         else{
             Currentlife += heal;
